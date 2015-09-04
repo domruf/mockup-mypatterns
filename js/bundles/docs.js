@@ -4,8 +4,8 @@
 
 require([
   'mockup-docs',  // We need mockup-core's `mockup-doc` pattern,
-  'bootstrap-collapse',  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
-  'mockup-fakeserver'  // And Mockup-core's fakeserver.
+  'bootstrap-collapse'//,  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
+  //'mockup-fakeserver'  // And Mockup-core's fakeserver.
 ], function(Docs) {
   'use strict';
 
