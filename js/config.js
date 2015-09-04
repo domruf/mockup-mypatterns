@@ -22,6 +22,48 @@
 
       'mockup-patterns-tablesorter': 'patterns/tablesorter/pattern',
 
+       // my deps
+      'mockup-patterns-modal': 'bower_components/mockup/mockup/patterns/modal/pattern',
+      'tinymce': 'bower_components/tinymce-builded/js/tinymce/tinymce',
+      'tinymce-modern-theme': 'bower_components/tinymce-builded/js/tinymce/themes/modern/theme',
+      'mockup-patterns-tinymce': 'bower_components/mockup/mockup/patterns/tinymce/pattern',
+      'mockup-patterns-tinymce-url': 'bower_components/mockup/mockup/patterns/tinymce',
+      'mockup-patterns-autotoc': 'bower_components/mockup/mockup/patterns/autotoc/pattern',
+      'mockup-patterns-relateditems': 'bower_components/mockup/mockup/patterns/relateditems/pattern',
+      'ace': 'bower_components/ace-builds/src/ace',
+      'mockup-patterns-texteditor': 'bower_components/mockup/mockup/patterns/texteditor/pattern',
+      'mockup-patterns-select2': 'bower_components/mockup/mockup/patterns/select2/pattern',
+      'mockup-patterns-tree': 'bower_components/mockup/mockup/patterns/tree/pattern',
+      'mockup-patterns-upload': 'bower_components/mockup/mockup/patterns/upload/pattern',
+      'jquery.event.drag': 'bower_components/mockup/mockup/lib/jquery.event.drag',
+      'jquery.event.drop': 'bower_components/mockup/mockup/lib/jquery.event.drop',
+      'mockup-patterns-upload-url': 'bower_components/mockup/mockup/patterns/upload',
+      'dropzone': 'bower_components/dropzone/downloads/dropzone-amd-module',
+      'mockup-patterns-backdrop': 'bower_components/mockup/mockup/patterns/backdrop/pattern',
+      'mockup-router': 'bower_components/mockup/mockup/js/router',
+      'mockup-utils': 'bower_components/mockup/mockup/js/utils',
+      'translate': 'bower_components/mockup/mockup/js/i18n-wrapper',
+      'mockup-i18n': 'bower_components/mockup/mockup/js/i18n',
+      'jquery.form': 'bower_components/jquery-form/jquery.form',
+      'select2': 'bower_components/select2/select2',
+      'jqtree': 'bower_components/jqtree/tree.jquery',
+      'ace-mode-css': 'bower_components/ace-builds/src/mode-css',
+      'ace-mode-c_cpp': 'bower_components/ace-builds/src/mode-c_cpp',
+      'ace-mode-html': 'bower_components/ace-builds/src/mode-html',
+      'ace-mode-lua': 'bower_components/ace-builds/src/mode-lua',
+      'ace-mode-java': 'bower_components/ace-builds/src/mode-java',
+      'ace-mode-javascript': 'bower_components/ace-builds/src/mode-javascript',
+      'ace-mode-python': 'bower_components/ace-builds/src/mode-python',
+      'ace-mode-text': 'bower_components/ace-builds/src/mode-text',
+      'ace-mode-xml': 'bower_components/ace-builds/src/mode-xml',
+      'ace-theme-dawn': 'bower_components/ace-builds/src/theme-dawn',
+      'ace-theme-monokai': 'bower_components/ace-builds/src/theme-monokai',
+
+      // my code
+      'mockup-patterns-tinymce-codesnippet': 'patterns/tinymce-codesnippet/pattern',
+      'mockup-patterns-tinymce-codesnippet-url': 'patterns/tinymce-codesnippet',
+      'mockup-bundles-sickpatterns': 'js/bundles/sickpatterns',
+
       // mockup-core dependencies. They have to be included here, since we did
       // not found a good way of requireing the base config at RequireJS
       // initialization. It works for grunt via Common JS.
@@ -55,10 +97,39 @@
       'bootstrap-transition': {exports: 'window.jQuery.support.transition', deps: ['jquery']},
       'expect': {exports: 'window.expect'},
       'sinon': {exports: 'window.sinon'},
-      'underscore': {exports: 'window._'}
+      'underscore': {exports: 'window._'},
+      'tinymce': {
+        exports: 'window.tinyMCE',
+        init: function () {
+          this.tinyMCE.DOM.events.domLoaded = true;
+          return this.tinyMCE;
+        },
+      },
+      'jqtree': { deps: ['jquery'] },
+      'tinymce-modern-theme': { deps: ['tinymce'] },
+      'jquery.event.drag': { deps: ['jquery'] },
+     'jquery.event.drop': { deps: ['jquery'], exports: '$.drop' },
     },
     wrapShim: true
   };
+
+  var tinymcePlugins = [
+    'advlist', 'anchor', 'autolink', 'autoresize', 'autosave', 'bbcode',
+    'charmap', 'code', 'colorpicker', 'contextmenu', 'directionality',
+    'emoticons', 'fullpage', 'fullscreen', 'hr', 'image', 'importcss',
+    'insertdatetime', 'layer', 'legacyoutput', 'link', 'lists', 'media',
+    'nonbreaking', 'noneditable', 'pagebreak', 'paste', 'preview', 'print',
+    'save', 'searchreplace', 'spellchecker', 'tabfocus', 'table', 'template',
+    'textcolor', 'textpattern', 'visualblocks', 'visualchars', 'wordcount',
+    'compat3x'
+  ];
+  for(var i=0; i<tinymcePlugins.length; i=i+1){
+    var plugin = tinymcePlugins[i];
+    requirejsOptions.paths['tinymce-' + plugin] = 'bower_components/tinymce-builded/js/tinymce/plugins/' + plugin + '/plugin';
+    requirejsOptions.shim['tinymce-' + plugin] = {
+      deps: ['tinymce']
+    };
+ }
 
   if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
     // Add this module to Common JS module exports, if available.
