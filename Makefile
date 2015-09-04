@@ -42,10 +42,13 @@ all: test-once bundles docs
 # Minimalpattern build task
 bundle-minimalpattern:
 	mkdir -p build
+	rm -rf build
 	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-minimalpattern $(DEBUG) $(VERBOSE)
 
 # Docs build task
 docs:
+	mkdir -p build
+	rm -rf build
 	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-docs $(DEBUG) $(VERBOSE)
 
 bootstrap-common:
