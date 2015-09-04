@@ -13,16 +13,15 @@ require([
     pages: [
       { // Index page.
         id: 'index',
-        title: 'Mockup',
-        description: 'A collection of client side patterns for faster and easier ' +
-                     'web  development',
+        title: 'Mockup - My Patterns',
+        description: 'A few mockup patterns that are not part of plone core.',
         text: '[See it in action!](#pattern)',
         autotoc: false
       },
       { // Patterns page.
         id: 'pattern',
         title: 'Patterns',
-        description: 'All the patterns you\'ll ever need',
+        description: 'A few mockup patterns that are not part of plone core.',
         autotoc: false,
         patterns: [
           { // Minimalpattern page
