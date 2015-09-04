@@ -30,6 +30,11 @@ require([
             title: 'Minimalpattern',  // pattern title.
             description: 'A minimal pattern',  // pattern description.
             url: 'patterns/minimalpattern/pattern.js'  // path to the pattern within the project structure.
+          },
+          { id: 'tablesorter',
+            title: 'Table Sorter',
+            description: 'A pattern you can apply to a table so it can have its items rearranged when clicking the header',
+            url: 'patterns/tablesorter/pattern.js'
           }
         ]
       }

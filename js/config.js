@@ -20,6 +20,8 @@
       'mockup-bundles-minimalpattern': 'js/bundles/minimalpattern',
       'mockup-bundles-docs': 'js/bundles/docs',
 
+      'mockup-patterns-tablesorter': 'patterns/tablesorter/pattern',
+
       // mockup-core dependencies. They have to be included here, since we did
       // not found a good way of requireing the base config at RequireJS
       // initialization. It works for grunt via Common JS.
