@@ -38,7 +38,7 @@
       'jquery.event.drag': 'bower_components/mockup/mockup/lib/jquery.event.drag',
       'jquery.event.drop': 'bower_components/mockup/mockup/lib/jquery.event.drop',
       'mockup-patterns-upload-url': 'bower_components/mockup/mockup/patterns/upload',
-      'dropzone': 'bower_components/dropzone/downloads/dropzone-amd-module',
+      'dropzone': 'bower_components/dropzone/dist/dropzone-amd-module',
       'mockup-patterns-backdrop': 'bower_components/mockup/mockup/patterns/backdrop/pattern',
       'mockup-router': 'bower_components/mockup/mockup/js/router',
       'mockup-utils': 'bower_components/mockup/mockup/js/utils',
