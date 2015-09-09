@@ -145,8 +145,11 @@ define([
           content: null,
           buttons: '.plone-btn'
         });
+        self.initWidth = parseInt(self.modal.options.width) || 600;
         self.modal.on('shown', function(e) {
           var aceed = ace.edit('code');
+          self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+          self.modal.positionModal();
           $('#mode').val(self.mode);
           $('#mode').on('change', function(){
             var mode = $('#mode').val();
@@ -160,26 +163,32 @@ define([
           .drag(function( ev, dd ){
             $( this ).css({
               width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + dd.deltaY )
+              height: Math.max( 20, dd.height + 2*dd.deltaY )
             });
             $( this ).parent().css({
               width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + dd.deltaY )
+              height: Math.max( 20, dd.height + 2*dd.deltaY )
             });
             self.width = parseInt( $( this ).css('width'));
             self.height = parseInt( $( this ).css('height'));
             $('input[name="width"]', self.modal.$modal).val(self.width);
             $('input[name="height"]', self.modal.$modal).val(self.height);
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           },{ handle:'.handle' });
           $('input[name="width"]', self.modal.$modal).on('input', function(evt){
             $('#code').css({width: Math.max( 20, $(this).val())});
             $('#code').parent().css({width: Math.max( 20, $(this).val())});
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           });
           $('input[name="height"]', self.modal.$modal).on('input', function(evt){
             $('#code').css({height: Math.max( 20, $(this).val())});
             $('#code').parent().css({height: Math.max( 20, $(this).val())});
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           });
 
@@ -255,10 +264,10 @@ define([
               self.mode = e.split(':')[1];
             }
             if(e.startsWith('width')){
-              self.width = e.split(':')[1];
+              self.width = parseInt(e.split(':')[1]);
             }
             if(e.startsWith('height')){
-              self.height = e.split(':')[1];
+              self.height = parseInt(e.split(':')[1]);
             }
           });
         }
