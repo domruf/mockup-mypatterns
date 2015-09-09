@@ -336,7 +336,6 @@ define([
     }
     editor.on('init', function(evt) {
       var self = this;
-      // TODO: find the right event to do this instead of a timeout
       self.posCodeElements = function(){
         var editor = this;
         $('pre.codesnippet', editor.contentDocument).each(function(i, code_element){
@@ -347,6 +346,7 @@ define([
             'left', $(editor.contentDocument).find('html').position().left + $(code_element).offset().left);
         });
       };
+      // TODO: find the right event to do this instead of a timeout
       setTimeout(function(){
         self.posCodeElements();
       }, 100);
@@ -358,6 +358,7 @@ define([
         var $el = $(self.selection.getNode());
         if((e.keyCode == 46 || e.keyCode == 8) && $el.hasClass('codesnippet')){
           $el.remove();
+          e.preventDefault();
           self.updateOverlay();
         }
         self.posCodeElements();
