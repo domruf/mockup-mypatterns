@@ -59,10 +59,11 @@
       'ace-theme-dawn': 'bower_components/ace-builds/src/theme-dawn',
       'ace-theme-monokai': 'bower_components/ace-builds/src/theme-monokai',
 
-      // my code
+      // for my code
       'mockup-patterns-tinymce-codesnippet': 'patterns/tinymce-codesnippet/pattern',
       'mockup-patterns-tinymce-codesnippet-url': 'patterns/tinymce-codesnippet',
-      'mockup-bundles-sickpatterns': 'js/bundles/sickpatterns',
+      'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour-standalone',
+      'mockup-patterns-bootstrap-tour': 'patterns/bootstrap-tour/pattern',
 
       // mockup-core dependencies. They have to be included here, since we did
       // not found a good way of requireing the base config at RequireJS
@@ -93,6 +94,7 @@
 
       // mockup-core shims
       'backbone': {exports: 'window.Backbone', deps: ['underscore', 'jquery']},
+      'bootstrap-tour': {exports: 'Tour', deps: ['jquery']},
       'bootstrap-collapse': {exports: 'window.jQuery.fn.collapse.Constructor', deps: ['jquery']},
       'bootstrap-transition': {exports: 'window.jQuery.support.transition', deps: ['jquery']},
       'expect': {exports: 'window.expect'},

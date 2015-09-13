@@ -43,6 +43,12 @@ require([
             title: 'Table Sorter',
             description: 'A pattern you can apply to a table so it can have its items rearranged when clicking the header',
             url: 'patterns/tablesorter/pattern.js'
+          },
+          { 
+            id: 'bootstrap-tour',
+            title: 'bootstrap-tour',
+            description: 'A pattern for creating tours to guide your users through your web site.',
+            url: 'patterns/bootstrap-tour/pattern.js'
           }
         ]
       }

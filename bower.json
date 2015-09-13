@@ -2,7 +2,8 @@
   "name": "mockup-minimalpattern",
   "description": "Minimal pattern for learning pattern creation",
   "dependencies": {
-    "mockup": "master"
+    "mockup": "2.0.9",
+    "bootstrap-tour": "0.10.2"
   },
   "devDependencies": {
     "expect": "0.3.1",
