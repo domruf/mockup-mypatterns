@@ -58,7 +58,7 @@ docs:
 bootstrap-common:
 	mkdir -p build
 
-bootstrap: clean bootstrap-common
+bootstrap: bootstrap-common
 	@echo node version: $(NODE_VERSION)
 ifeq ($(NODE_VERSION_LT_011),true)
 	# for node < v0.11.x
