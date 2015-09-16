@@ -3,7 +3,7 @@
  * Options:
  *   name(string): This option is used to build the name of the storage item where the tour state is stored. The name should contain only alphanumerics, underscores and hyphens. You can initialize several tours with different names in the same page and application. ('tour')
  *   container(string): Appends the step popover to a specific element. ('body')
- *   backdrop(boolean): Show a dark backdrop behind the popover and its element, highlighting the current step. (false)
+ *   backdrop(boolean): Show a dark backdrop behind the popover and its element, highlighting the current step. (true)
  *   placement(string): How to position the popover. Possible choices. ('top')
  *   title(string): Step title
  *   content(string): Step content
@@ -49,7 +49,7 @@ define([
       var self = this;
       self.tour = new Tour({
         name: self.options.name,
-        backdrop: self.options.backdrop,
+        backdrop: self.options.backdrop !== 'false',
         container: self.options.container,
         placement: self.options.placement,
         backdropPadding: 10

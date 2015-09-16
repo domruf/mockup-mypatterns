@@ -45,9 +45,9 @@ bundle-minimalpattern:
 	rm -rf build
 	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-minimalpattern $(DEBUG) $(VERBOSE)
 
-bundle-mypatterns:
+bundle-widgets:
 	mkdir -p build
-	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-mypatterns $(DEBUG) $(VERBOSE)
+	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-widgets $(DEBUG) $(VERBOSE)
 
 # Docs build task
 docs:

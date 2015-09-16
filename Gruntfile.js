@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     {extraInclude: docsExtraIncludes, url: 'docs'}
   );
 
-  mockup.registerBundle('mypatterns',
+  mockup.registerBundle('widgets',
     {
       less: {
         options: {
@@ -41,12 +41,12 @@ module.exports = function(grunt) {
       },
     },
     {
+      path: 'build/',
       extraInclude: docsExtraIncludes,
-      url: 'mypatterns',
+      url: '++resource++plone.app.widgets',
     }
   );
-  // Register the Minimalpattern pattern
-  mockup.registerBundle('minimalpattern');
+  
 
   // initialize grunt and set up all tasks.
   mockup.initGrunt(grunt);

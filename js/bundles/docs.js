@@ -1,16 +1,27 @@
-/* Minimalpattern documentation bundle
+/* Mypattern documentation bundle
  *
  */
 
 require([
   'mockup-docs',  // We need mockup-core's `mockup-doc` pattern,
+  'tinymce',
+  'mockup-patterns-bootstrap-tour',
   'bootstrap-collapse',  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
   'ace',
   'mockup-fakeserver'  // And Mockup-core's fakeserver.
-], function(Docs) {
+], function(Docs, Tinymce) {
   'use strict';
 
   ace.config.set("packaged", false); // TODO: quickfix for problem loading ace modules in docs build 
+  Tinymce.on('AddEditor', function(evt){
+    evt.editor.on('LoadContent', function(e) {
+      $('body').addClass('pat-bootstrap-tour').attr('data-pat-bootstrap-tour', 'backdrop:false');
+      $('.mce-code-button').attr('data-pat-bootstrap-tour', 'title:Add Code Snippets;content:New! You can add code snippet blocks now!');
+      setTimeout(function(){
+        tinymce.registry.scan($('body'), ["bootstrap-tour"]);
+      }, 1000);
+    });
+  });
   var docs = new Docs({
     pages: [
       { // Index page.
