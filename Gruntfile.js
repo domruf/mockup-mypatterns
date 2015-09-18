@@ -23,8 +23,23 @@ module.exports = function(grunt) {
   }
 
   // Register the docs bundle with some custom config.
-  mockup.registerBundle('docs',
-    {less: {options: {modifyVars: {bowerPath: '"bower_components/"' }}}},
+  mockup.registerBundle('docs', {
+      less: {
+        options: {modifyVars: {bowerPath: '"bower_components/"' }}
+      },
+      sed: {
+        'docs-ace-packaged': {
+          path: 'build/docs.js',
+          pattern: 'ace\\.config\\.set\\("packaged"\\, true\\)',
+          replacement: 'ace.config.set("packaged", false)'
+        },
+        'docs-min-ace-packaged': {
+          path: 'build/docs.min.js',
+          pattern: 'ace\\.config\\.set\\("packaged"\\,\\!\\d\\)',
+          replacement: 'ace.config.set("packaged",!1)'
+        }
+      }
+    },
     {extraInclude: docsExtraIncludes, url: 'docs'}
   );
 
