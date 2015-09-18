@@ -17,7 +17,7 @@
  *                            }'>
  *          <p>test content</p>
  *                                <p>bla <b>bla</b> bla</p>
- *                                <pre id="codesnippet_1"
+ *                                <pre style="padding:0;" id="codesnippet_1"
  *                                         contenteditable="false"
  *                                         class="pat-texteditor codesnippet"
  *                                         data-pat-texteditor="theme:dawn;readOnly:true;showPrintMargin:true;mode:javascript;width:600;height:150;">
@@ -162,12 +162,12 @@ define([
           })
           .drag(function( ev, dd ){
             $( this ).css({
-              width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + 2*dd.deltaY )
+              width: Math.max( 150, dd.width + dd.deltaX ),
+              height: Math.max( 50, dd.height + 2*dd.deltaY )
             });
             $( this ).parent().css({
-              width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + 2*dd.deltaY )
+              width: Math.max( 150, dd.width + dd.deltaX ),
+              height: Math.max( 50, dd.height + 2*dd.deltaY )
             });
             self.width = parseInt( $( this ).css('width'));
             self.height = parseInt( $( this ).css('height'));
@@ -178,15 +178,15 @@ define([
             aceed.resize();
           },{ handle:'.handle' });
           $('input[name="width"]', self.modal.$modal).on('input', function(evt){
-            $('#code').css({width: Math.max( 20, $(this).val())});
-            $('#code').parent().css({width: Math.max( 20, $(this).val())});
+            $('#code').css({width: Math.max( 150, $(this).val())});
+            $('#code').parent().css({width: Math.max( 150, $(this).val())});
             self.modal.options.width = Math.max(self.initWidth, self.width + 30);
             self.modal.positionModal();
             aceed.resize();
           });
           $('input[name="height"]', self.modal.$modal).on('input', function(evt){
-            $('#code').css({height: Math.max( 20, $(this).val())});
-            $('#code').parent().css({height: Math.max( 20, $(this).val())});
+            $('#code').css({height: Math.max( 50, $(this).val())});
+            $('#code').parent().css({height: Math.max( 50, $(this).val())});
             self.modal.options.width = Math.max(self.initWidth, self.width + 30);
             self.modal.positionModal();
             aceed.resize();
@@ -226,7 +226,7 @@ define([
                   else
                       return uniqID(20)
               }
-              var newPre = $('<pre style="background-color:white;color:inherit;" id="codesnippet_' + uniqID(8) + '" contenteditable="false" class="pat-texteditor codesnippet" data-pat-texteditor="theme:dawn;readOnly:true;mode:' + mode + ';width:' + width + ';height:' + height + ';">').text(codeString);
+              var newPre = $('<pre style="padding:0;background-color:white;color:inherit;" id="codesnippet_' + uniqID(8) + '" contenteditable="false" class="pat-texteditor codesnippet" data-pat-texteditor="theme:dawn;readOnly:true;mode:' + mode + ';width:' + width + ';height:' + height + ';">').text(codeString);
               selNode.after(newPre);
               selNode = newPre;
             }
@@ -332,6 +332,14 @@ define([
         var code_clone = $(code_element).clone();
         overlay.append(code_clone);
         tinymce.registry.scan(code_clone);
+        code_clone.on('focusin', function(e){
+          var range = document.createRange();
+          var sel = editor.iframeElement.contentWindow.getSelection();
+          range.setStart($('#' + this.id, $(editor.iframeElement.contentDocument))[0], 0);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        });
         $(code_element).css('height', code_clone.height());
         $(code_element).css('width', code_clone.width());
         $('.ace_scrollbar-v').css('pointer-events', 'auto');

@@ -1,7 +1,7 @@
 {
-  "name": "mockup-minimalpattern",
+  "name": "mockup-mypatterns",
   "version": "0.0.1",
-  "description": "Minimal pattern for learning pattern creation",
+  "description": "A few mockup patterns that are not part of plone core.",
   "homepage": "http://plone.github.io/mockup",
   "devDependencies": {
     "bower": "~1.3.2",
@@ -40,10 +40,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/collective/mockup-minimalpattern.git"
+    "url": "https://github.com/domruf/mockup-pypatterns.git"
   },
   "bugs": {
-    "url": "https://github.com/collective/mockup-minimalpattern/issues",
+    "url": "https://github.com/domruf/mockup-mypatterns/issues",
     "email": "dev@programmatic.pro"
   },
   "licenses": [

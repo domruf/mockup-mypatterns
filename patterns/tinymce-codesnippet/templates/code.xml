@@ -7,21 +7,23 @@
         <option value="javascript">javascript</option>
         <option value="java">Java</option>
         <option value="python">python</option>
-        <option value="cpp">C/C++</option>
+        <option value="c_cpp">C/C++</option>
         <option value="lua">Lua</option>
     </select>
     <pre id="code" class="pat-texteditor"
           data-pat-texteditor="theme:dawn;mode:<%- mode %>;width:<%- width %>;height:<%- height %>;"><%= content %></pre>
 
-    <div style="width:130px;position:relative;">
-        <label><%- widthText %>:</label>
-        <input type="text" name="width" value="<%- width %>" style="text-align:right;width:50px;right:20px;position: absolute;"/>
-        <span style="right: 0;position: absolute;">px</span>
-    </div>
-    <div style="width:130px;position:relative;">
-        <label><%- heightText %>:</label>
-        <input type="text" name="height" value="<%- height %>" style="text-align:right;width:50px;right:20px;position: absolute;"/>
-        <span style="right: 0;position: absolute;">px</span>
+    <div id="sizevalues">
+        <div style="width:130px;position:relative;">
+            <label><%- widthText %>:</label>
+            <input type="text" name="width" value="<%- width %>" style="text-align:right;width:50px;right:20px;position: absolute;"/>
+            <span style="right: 0;position: absolute;">px</span>
+        </div>
+        <div style="width:130px;position:relative;">
+            <label><%- heightText %>:</label>
+            <input type="text" name="height" value="<%- height %>" style="text-align:right;width:50px;right:20px;position: absolute;"/>
+            <span style="right: 0;position: absolute;">px</span>
+        </div>
     </div>
     <input type="submit" class="plone-btn" name="cancel" value="<%- cancelBtn %>" />
     <input type="submit" class="plone-btn plone-btn-primary" name="insert" value="<%- insertBtn %>" />

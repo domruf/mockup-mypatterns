@@ -39,13 +39,8 @@ endif
 # All runs tasks test-once, bundles and docs
 all: test-once bundles docs
 
-# Minimalpattern build task
-bundle-minimalpattern:
-	mkdir -p build
-	rm -rf build
-	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-minimalpattern $(DEBUG) $(VERBOSE)
-
 bundle-widgets:
+	rm -rf build
 	mkdir -p build
 	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-widgets $(DEBUG) $(VERBOSE)
 

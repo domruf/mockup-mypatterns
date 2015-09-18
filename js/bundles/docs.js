@@ -5,21 +5,53 @@
 require([
   'mockup-docs',  // We need mockup-core's `mockup-doc` pattern,
   'tinymce',
-  'mockup-patterns-bootstrap-tour',
+  'bootstrap-tour',
   'bootstrap-collapse',  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
   'ace',
   'mockup-fakeserver'  // And Mockup-core's fakeserver.
-], function(Docs, Tinymce) {
+], function(Docs, Tinymce, BootstrapTour) {
   'use strict';
 
   ace.config.set("packaged", false); // TODO: quickfix for problem loading ace modules in docs build 
   Tinymce.on('AddEditor', function(evt){
     evt.editor.on('LoadContent', function(e) {
-      $('body').addClass('pat-bootstrap-tour').attr('data-pat-bootstrap-tour', 'backdrop:false');
-      $('.mce-code-button').attr('data-pat-bootstrap-tour', 'title:Add Code Snippets;content:New! You can add code snippet blocks now!');
-      setTimeout(function(){
-        tinymce.registry.scan($('body'), ["bootstrap-tour"]);
-      }, 1000);
+      var tour = new BootstrapTour({
+        name: 'CodesnippetTour'
+      });
+      tour.addStep({
+        element: $('.mce-code-button'),
+        placement: 'top',
+        title: 'Add Code Snippets',
+        content: 'You can add code snippet blocks now!',
+        onNext: function(tour){
+          $('.mce-code-button').click();
+          $('.pattern-modal-buttons .plone-btn').on('click',function(){
+            tour.end();
+            $('.tour-CodesnippetTour').remove();
+          });
+        },
+      });
+      tour.addStep({
+          element: '#mode',
+          placement: 'top',
+          title: 'Choose Language',
+          content: 'You can choose different language syntax highlighting.'
+      });
+      tour.addStep({
+          element: '.mce-i-resize.handle',
+          placement: 'right',
+          title: 'Resize',
+          content: 'You can resize the code block by draging the lower right corner...'
+      });
+      tour.addStep({
+          element: '#sizevalues',
+          placement: 'left',
+          title: 'Resize',
+          content: '...or setting concrete values.'
+      });
+
+      tour.init();
+      tour.start();
     });
   });
   var docs = new Docs({
