@@ -17,7 +17,7 @@
  *                            }'>
  *          <p>test content</p>
  *                                <p>bla <b>bla</b> bla</p>
- *                                <pre id="codesnippet_1"
+ *                                <pre style="padding:0;" id="codesnippet_1"
  *                                         contenteditable="false"
  *                                         class="pat-texteditor codesnippet"
  *                                         data-pat-texteditor="theme:dawn;readOnly:true;showPrintMargin:true;mode:javascript;width:600;height:150;">
@@ -145,8 +145,11 @@ define([
           content: null,
           buttons: '.plone-btn'
         });
+        self.initWidth = parseInt(self.modal.options.width) || 600;
         self.modal.on('shown', function(e) {
           var aceed = ace.edit('code');
+          self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+          self.modal.positionModal();
           $('#mode').val(self.mode);
           $('#mode').on('change', function(){
             var mode = $('#mode').val();
@@ -159,27 +162,33 @@ define([
           })
           .drag(function( ev, dd ){
             $( this ).css({
-              width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + dd.deltaY )
+              width: Math.max( 150, dd.width + dd.deltaX ),
+              height: Math.max( 50, dd.height + 2*dd.deltaY )
             });
             $( this ).parent().css({
-              width: Math.max( 20, dd.width + dd.deltaX ),
-              height: Math.max( 20, dd.height + dd.deltaY )
+              width: Math.max( 150, dd.width + dd.deltaX ),
+              height: Math.max( 50, dd.height + 2*dd.deltaY )
             });
             self.width = parseInt( $( this ).css('width'));
             self.height = parseInt( $( this ).css('height'));
             $('input[name="width"]', self.modal.$modal).val(self.width);
             $('input[name="height"]', self.modal.$modal).val(self.height);
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           },{ handle:'.handle' });
           $('input[name="width"]', self.modal.$modal).on('input', function(evt){
-            $('#code').css({width: Math.max( 20, $(this).val())});
-            $('#code').parent().css({width: Math.max( 20, $(this).val())});
+            $('#code').css({width: Math.max( 150, $(this).val())});
+            $('#code').parent().css({width: Math.max( 150, $(this).val())});
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           });
           $('input[name="height"]', self.modal.$modal).on('input', function(evt){
-            $('#code').css({height: Math.max( 20, $(this).val())});
-            $('#code').parent().css({height: Math.max( 20, $(this).val())});
+            $('#code').css({height: Math.max( 50, $(this).val())});
+            $('#code').parent().css({height: Math.max( 50, $(this).val())});
+            self.modal.options.width = Math.max(self.initWidth, self.width + 30);
+            self.modal.positionModal();
             aceed.resize();
           });
 
@@ -190,11 +199,15 @@ define([
             e.stopPropagation();
 
             var codeString = ace.edit('code').getValue();
-            var selNode = $(self.options.editor.selection.getNode());
+            if($(self.options.editor.selection.getNode()).is('#mcepastebin')){
+              var selNode = editor.lastSelNode;
+            }else{
+              var selNode = $(self.options.editor.selection.getNode());
+            }
             var mode = $('select#mode', self.modal.$modal).val();
             var width = $('input[name="width"]', self.modal.$modal).val();
             var height = $('input[name="height"]', self.modal.$modal).val();
-            if(selNode.is('pre')){
+            if(selNode.is('.codesnippet')){
               selNode.text(codeString);
               selNode.attr('data-pat-texteditor', 'theme:dawn;readOnly:true;mode:' + mode + ';width:' + width + ';height:' + height + ';');
             }else{
@@ -213,7 +226,7 @@ define([
                   else
                       return uniqID(20)
               }
-              var newPre = $('<pre id="codesnippet_' + uniqID(8) + '" contenteditable="false" class="pat-texteditor codesnippet" data-pat-texteditor="theme:dawn;readOnly:true;mode:' + mode + ';width:' + width + ';height:' + height + ';">').text(codeString);
+              var newPre = $('<pre style="padding:0;background-color:white;color:inherit;" id="codesnippet_' + uniqID(8) + '" contenteditable="false" class="pat-texteditor codesnippet" data-pat-texteditor="theme:dawn;readOnly:true;mode:' + mode + ';width:' + width + ';height:' + height + ';">').text(codeString);
               selNode.after(newPre);
               selNode = newPre;
             }
@@ -255,17 +268,17 @@ define([
               self.mode = e.split(':')[1];
             }
             if(e.startsWith('width')){
-              self.width = e.split(':')[1];
+              self.width = parseInt(e.split(':')[1]);
             }
             if(e.startsWith('height')){
-              self.height = e.split(':')[1];
+              self.height = parseInt(e.split(':')[1]);
             }
           });
         }
       },
       generateModalHtml: function() {
         var self = this;
-        if(self.selNode.is('pre.codesnippet')){
+        if(self.selNode.is('.codesnippet')){
           var content = self.selNode.text();
         }else{
           var content = editor.pasteText || '';
@@ -288,7 +301,8 @@ define([
       icon: 'code',
       tooltip: 'Insert/edit code snippet',
       onclick: editor.addCodeClicked,
-      stateSelector: 'pre.pat-texteditor'
+      stateSelector: '.pat-texteditor',
+      classes: 'widget btn code-button'
     });
     editor.addMenuItem('codesnippet', {
       icon: 'code',
@@ -296,7 +310,7 @@ define([
       context: 'insert',
       tooltip: 'Insert/edit code snippet',
       onclick: editor.addCodeClicked,
-      stateSelector: 'pre.pat-texteditor',
+      stateSelector: '.pat-texteditor',
       prependToContext: true
     });
     editor.settings.toolbar = editor.settings.toolbar.replace('ploneimage', 'ploneimage codesnippet');
@@ -309,15 +323,23 @@ define([
       var overlay = $('<div class="codesnippetoverlay" style="position:absolute;overflow:hidden;background:transparent;" />');
       overlay.height($(this.iframeElement).height());
       overlay.width($(this.contentDocument).width());
-      overlay.css('top', $(this.iframeElement).position().top+1);
+      overlay.css('top', $(this.iframeElement).position().top + $(this.iframeElement).parents('.mce-tinymce').position().top + 1);
       overlay.css('pointer-events', 'none'); // TODO: IE < 11 doesn't support this disable the whole overlay in IE < 11
       $(this.getElement()).parent().append(overlay);
       $(this.getElement()).parent().css('position', 'relative');
 
-      $('pre.codesnippet', this.contentDocument).each(function(i, code_element){
+      $('.codesnippet', this.contentDocument).each(function(i, code_element){
         var code_clone = $(code_element).clone();
         overlay.append(code_clone);
         tinymce.registry.scan(code_clone);
+        code_clone.on('focusin', function(e){
+          var range = document.createRange();
+          var sel = editor.iframeElement.contentWindow.getSelection();
+          range.setStart($('#' + this.id, $(editor.iframeElement.contentDocument))[0], 0);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        });
         $(code_element).css('height', code_clone.height());
         $(code_element).css('width', code_clone.width());
         $('.ace_scrollbar-v').css('pointer-events', 'auto');
@@ -327,10 +349,9 @@ define([
     }
     editor.on('init', function(evt) {
       var self = this;
-      // TODO: find the right event to do this instead of a timeout
       self.posCodeElements = function(){
         var editor = this;
-        $('pre.codesnippet', editor.contentDocument).each(function(i, code_element){
+        $('.codesnippet', editor.contentDocument).each(function(i, code_element){
           $('#' + code_element.id, editor.contentAreaContainer.parent).parent().css('position', 'absolute'); // TODO: can I prevent that this gets set in the first place?
           $('#' + code_element.id, editor.contentAreaContainer.parent).css(
             'top', $(code_element).position().top - $(editor.contentDocument).scrollTop());
@@ -338,7 +359,9 @@ define([
             'left', $(editor.contentDocument).find('html').position().left + $(code_element).offset().left);
         });
       };
+      // TODO: find the right event to do this instead of a timeout
       setTimeout(function(){
+        self.updateOverlay();
         self.posCodeElements();
       }, 100);
       $(this.contentWindow).resize(function(e){
@@ -347,8 +370,11 @@ define([
       // tinymce.on('change'...)' is not enough
       $(this.contentDocument).on('keydown', function(e){
         var $el = $(self.selection.getNode());
+        self.lastSelNode = $el; // tinymce paste plugin sets selection to a pastebin element on keydown so I remember the element here
+
         if((e.keyCode == 46 || e.keyCode == 8) && $el.hasClass('codesnippet')){
           $el.remove();
+          e.preventDefault();
           self.updateOverlay();
         }
         self.posCodeElements();
@@ -369,12 +395,6 @@ define([
     editor.on('redo', function(evt){
       this.updateOverlay();
       this.posCodeElements();
-    });
-
-    editor.on('dblClick', function(evt) {
-      if($(evt.target).hasClass('codesnippet')){
-        this.addCodeClicked();
-      }
     });
     editor.on('paste', function(evt) {
       var cbText = evt.clipboardData.getData('Text');

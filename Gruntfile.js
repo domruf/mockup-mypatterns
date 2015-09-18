@@ -28,8 +28,7 @@ module.exports = function(grunt) {
     {extraInclude: docsExtraIncludes, url: 'docs'}
   );
 
-  mockup.registerBundle('mypatterns',
-    {
+  mockup.registerBundle('widgets', {
       less: {
         options: {
           modifyVars: {
@@ -39,14 +38,25 @@ module.exports = function(grunt) {
           }
         }
       },
-    },
-    {
+      sed: {
+          'widgets-ace-path': {
+            path: 'build/widgets.js',
+            pattern: '\\+\\+plone\\+\\+static/components/ace-builds/src/',
+            replacement: '++resource++plone.resourceeditor/ace/'
+          },
+          'widgets-min-ace-path': {
+            path: 'build/widgets.min.js',
+            pattern: '\\+\\+plone\\+\\+static/components/ace-builds/src/',
+            replacement: '++resource++plone.resourceeditor/ace/'
+          }
+      }
+    },{
+      path: 'build/',
       extraInclude: docsExtraIncludes,
-      url: 'mypatterns',
+      url: '++resource++plone.app.widgets',
     }
   );
-  // Register the Minimalpattern pattern
-  mockup.registerBundle('minimalpattern');
+  
 
   // initialize grunt and set up all tasks.
   mockup.initGrunt(grunt);

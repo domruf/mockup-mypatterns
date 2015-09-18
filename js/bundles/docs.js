@@ -1,16 +1,59 @@
-/* Minimalpattern documentation bundle
+/* Mypattern documentation bundle
  *
  */
 
 require([
   'mockup-docs',  // We need mockup-core's `mockup-doc` pattern,
+  'tinymce',
+  'bootstrap-tour',
   'bootstrap-collapse',  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
   'ace',
   //'mockup-fakeserver'  // And Mockup-core's fakeserver.
-], function(Docs) {
+], function(Docs, Tinymce, BootstrapTour) {
   'use strict';
 
   ace.config.set("packaged", false); // TODO: quickfix for problem loading ace modules in docs build 
+  Tinymce.on('AddEditor', function(evt){
+    evt.editor.on('LoadContent', function(e) {
+      var tour = new BootstrapTour({
+        name: 'CodesnippetTour'
+      });
+      tour.addStep({
+        element: $('.mce-code-button'),
+        placement: 'top',
+        title: 'Add Code Snippets',
+        content: 'You can add code snippet blocks now!',
+        onNext: function(tour){
+          $('.mce-code-button').click();
+          $('.pattern-modal-buttons .plone-btn').on('click',function(){
+            tour.end();
+            $('.tour-CodesnippetTour').remove();
+          });
+        },
+      });
+      tour.addStep({
+          element: '#mode',
+          placement: 'top',
+          title: 'Choose Language',
+          content: 'You can choose different language syntax highlighting.'
+      });
+      tour.addStep({
+          element: '.mce-i-resize.handle',
+          placement: 'right',
+          title: 'Resize',
+          content: 'You can resize the code block by draging the lower right corner...'
+      });
+      tour.addStep({
+          element: '#sizevalues',
+          placement: 'left',
+          title: 'Resize',
+          content: '...or setting concrete values.'
+      });
+
+      tour.init();
+      tour.start();
+    });
+  });
   var docs = new Docs({
     pages: [
       { // Index page.
@@ -43,6 +86,12 @@ require([
             title: 'Table Sorter',
             description: 'A pattern you can apply to a table so it can have its items rearranged when clicking the header',
             url: 'patterns/tablesorter/pattern.js'
+          },
+          { 
+            id: 'bootstrap-tour',
+            title: 'bootstrap-tour',
+            description: 'A pattern for creating tours to guide your users through your web site.',
+            url: 'patterns/bootstrap-tour/pattern.js'
           }
         ]
       }

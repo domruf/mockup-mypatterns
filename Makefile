@@ -39,15 +39,10 @@ endif
 # All runs tasks test-once, bundles and docs
 all: test-once bundles docs
 
-# Minimalpattern build task
-bundle-minimalpattern:
-	mkdir -p build
+bundle-widgets:
 	rm -rf build
-	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-minimalpattern $(DEBUG) $(VERBOSE)
-
-bundle-mypatterns:
 	mkdir -p build
-	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-mypatterns $(DEBUG) $(VERBOSE)
+	NODE_PATH=$(NODE_PATH) $(GRUNT) bundle-widgets $(DEBUG) $(VERBOSE)
 
 # Docs build task
 docs:
@@ -58,7 +53,7 @@ docs:
 bootstrap-common:
 	mkdir -p build
 
-bootstrap: clean bootstrap-common
+bootstrap: bootstrap-common
 	@echo node version: $(NODE_VERSION)
 ifeq ($(NODE_VERSION_LT_011),true)
 	# for node < v0.11.x

@@ -17,8 +17,21 @@
       'pat-registry': 'bower_components/mockup-core/js/registry',
       'logging': 'bower_components/logging/src/logging',
       'mockup-patterns-minimalpattern': 'patterns/minimalpattern/pattern',
-      'mockup-bundles-minimalpattern': 'js/bundles/minimalpattern',
+      'mockup-bundles-widgets': 'js/bundles/widgets',
       'mockup-bundles-docs': 'js/bundles/docs',
+      'mockup-patterns-passwordstrength': 'bower_components/mockup/mockup/patterns/passwordstrength/pattern',
+      'mockup-patterns-passwordstrength-url': 'bower_components/mockup/mockup/patterns/passwordstrength',
+      'mockup-patterns-pickadate': 'bower_components/mockup/mockup/patterns/pickadate/pattern',
+      'picker': 'bower_components/pickadate/lib/picker',
+      'picker.date': 'bower_components/pickadate/lib/picker.date',
+      'picker.time': 'bower_components/pickadate/lib/picker.time',
+      //'mockup-patterns-recurrence': 'bower_components/mockup/mockup/patterns/recurrence/pattern',
+      //'jquery.recurrenceinput': 'bower_components/jquery.recurrenceinput.js/src/jquery.recurrenceinput',
+      //'jquery.tools.dateinput': 'bower_components/jquery.recurrenceinput.js/lib/jquery.tools.dateinput',
+      //'jquery.tools.overlay': 'bower_components/jquery.recurrenceinput.js/lib/jquery.tools.overlay',
+      //'jquery.tmpl': 'bower_components/jquery.recurrenceinput.js/lib/jquery.tmpl',
+      'mockup-patterns-querystring': 'bower_components/mockup/mockup/patterns/querystring/pattern',
+      'mockup-patterns-textareamimetypeselector': 'bower_components/mockup/mockup/patterns/textareamimetypeselector/pattern',
 
       'mockup-patterns-tablesorter': 'patterns/tablesorter/pattern',
 
@@ -38,7 +51,7 @@
       'jquery.event.drag': 'bower_components/mockup/mockup/lib/jquery.event.drag',
       'jquery.event.drop': 'bower_components/mockup/mockup/lib/jquery.event.drop',
       'mockup-patterns-upload-url': 'bower_components/mockup/mockup/patterns/upload',
-      'dropzone': 'bower_components/dropzone/downloads/dropzone-amd-module',
+      'dropzone': 'bower_components/dropzone/dist/dropzone-amd-module',
       'mockup-patterns-backdrop': 'bower_components/mockup/mockup/patterns/backdrop/pattern',
       'mockup-router': 'bower_components/mockup/mockup/js/router',
       'mockup-utils': 'bower_components/mockup/mockup/js/utils',
@@ -59,10 +72,11 @@
       'ace-theme-dawn': 'bower_components/ace-builds/src/theme-dawn',
       'ace-theme-monokai': 'bower_components/ace-builds/src/theme-monokai',
 
-      // my code
+      // for my code
       'mockup-patterns-tinymce-codesnippet': 'patterns/tinymce-codesnippet/pattern',
       'mockup-patterns-tinymce-codesnippet-url': 'patterns/tinymce-codesnippet',
-      'mockup-bundles-sickpatterns': 'js/bundles/sickpatterns',
+      'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour-standalone',
+      'mockup-patterns-bootstrap-tour': 'patterns/bootstrap-tour/pattern',
 
       // mockup-core dependencies. They have to be included here, since we did
       // not found a good way of requireing the base config at RequireJS
@@ -93,6 +107,7 @@
 
       // mockup-core shims
       'backbone': {exports: 'window.Backbone', deps: ['underscore', 'jquery']},
+      'bootstrap-tour': {exports: 'Tour', deps: ['jquery']},
       'bootstrap-collapse': {exports: 'window.jQuery.fn.collapse.Constructor', deps: ['jquery']},
       'bootstrap-transition': {exports: 'window.jQuery.support.transition', deps: ['jquery']},
       'expect': {exports: 'window.expect'},
