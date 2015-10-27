@@ -2,7 +2,7 @@
   "name": "mockup-minimalpattern",
   "description": "Minimal pattern for learning pattern creation",
   "dependencies": {
-    "mockup": "2.0.8",
+    "mockup": "master",
     "bootstrap-tour": "master"
   },
   "devDependencies": {
@@ -10,8 +10,9 @@
     "sinonjs": "1.10.2"
   },
   "resolutions": {
-    "jquery": "1.11.1",
+    "bootstrap": "3.3.4",
+    "jquery": "1.11.3",
     "select2": "3.5.1",
-    "patternslib": "2.0.9"
+    "moment": "2.10.3"
   }
 }

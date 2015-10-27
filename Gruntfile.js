@@ -2,8 +2,7 @@
 module.exports = function(grunt) {
   'use strict';
 
-  // Get mockup-core's grunt infrastructure
-  var MockupGrunt = require('./bower_components/mockup-core/js/grunt');
+  var MockupGrunt = require('./bower_components/mockup/mockup/js/grunt');
 
   // Include the project's RequireJS configuration
   var requirejsOptions = require('./js/config');
@@ -25,7 +24,12 @@ module.exports = function(grunt) {
   // Register the docs bundle with some custom config.
   mockup.registerBundle('docs', {
       less: {
-        options: {modifyVars: {bowerPath: '"bower_components/"' }}
+        options: {
+          modifyVars: {
+            bowerPath: '"bower_components/"',
+            mockuplessPath: '"bower_components/mockup/mockup/less/"'
+          }
+        }
       },
       sed: {
         'docs-ace-packaged': {

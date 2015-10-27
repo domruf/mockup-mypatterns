@@ -29,8 +29,8 @@
 
 define([
   'jquery',
-  'mockup-patterns-base',
-  'mockup-parser',
+  'pat-base',
+  'pat-mockup-parser',
   'bootstrap-tour'
 ], function ($, Base, Parser, Tour) {
   'use strict';

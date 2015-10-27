@@ -9,12 +9,12 @@
     paths: {
       // This pattern's dependencies
       'jquery': 'bower_components/jquery/dist/jquery',
-      'mockup-patterns-base': 'bower_components/mockup-core/js/pattern',
       'pat-compat': 'bower_components/patternslib/src/core/compat',
       'pat-utils': 'bower_components/patternslib/src/core/utils',
       'pat-jquery-ext': 'bower_components/patternslib/src/core/jquery-ext',
       'pat-logger': 'bower_components/patternslib/src/core/logger',
-      'pat-registry': 'bower_components/mockup-core/js/registry',
+      'pat-registry': 'bower_components/patternslib/src/core/registry',
+      'pat-base': 'bower_components/patternslib/src/core/base',
       'logging': 'bower_components/logging/src/logging',
       'mockup-patterns-minimalpattern': 'patterns/minimalpattern/pattern',
       'mockup-bundles-widgets': 'js/bundles/widgets',
@@ -81,13 +81,13 @@
       // mockup-core dependencies. They have to be included here, since we did
       // not found a good way of requireing the base config at RequireJS
       // initialization. It works for grunt via Common JS.
-      'mockup-docs': 'bower_components/mockup-core/js/docs/app',
-      'mockup-docs-navigation': 'bower_components/mockup-core/js/docs/navigation',
-      'mockup-docs-page': 'bower_components/mockup-core/js/docs/page',
-      'mockup-docs-pattern': 'bower_components/mockup-core/js/docs/pattern',
-      'mockup-docs-view': 'bower_components/mockup-core/js/docs/view',
+      'mockup-docs': 'bower_components/mockup/mockup/js/docs/app',
+      'mockup-docs-navigation': 'bower_components/mockup/mockup/js/docs/navigation',
+      'mockup-docs-page': 'bower_components/mockup/mockup/js/docs/page',
+      'mockup-docs-pattern': 'bower_components/mockup/mockup/js/docs/pattern',
+      'mockup-docs-view': 'bower_components/mockup/mockup/js/docs/view',
       'mockup-fakeserver': 'bower_components/mockup/mockup/tests/fakeserver',
-      'mockup-parser': 'bower_components/mockup-core/js/parser',
+      'pat-mockup-parser': 'bower_components/patternslib/src/core/mockup-parser',
       'JSXTransformer': 'bower_components/react/JSXTransformer',
       'backbone': 'bower_components/backbone/backbone',
       'bootstrap-collapse': 'bower_components/bootstrap/js/collapse',
@@ -98,7 +98,7 @@
       'react': 'bower_components/react/react',
       'sinon': 'bower_components/sinonjs/sinon',
       'text': 'bower_components/requirejs-text/text',
-      'underscore': 'bower_components/lodash/dist/lodash.underscore'
+      'underscore': 'bower_components/underscore/underscore'
     },
     shim: {
       // This package's shims (None). Shims are libraries, which are not

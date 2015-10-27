@@ -3,12 +3,12 @@
  */
 
 require([
-  'mockup-docs',  // We need mockup-core's `mockup-doc` pattern,
+  'mockup-docs',  // We need mockup's `mockup-doc` pattern,
   'tinymce',
   'bootstrap-tour',
   'bootstrap-collapse',  // Bootstrap collapse for expanding the pattern title to a pattern, if we click on it,
   'ace',
-  'mockup-fakeserver'  // And Mockup-core's fakeserver.
+  'mockup-fakeserver'  // And Mockup's fakeserver.
 ], function(Docs, Tinymce, BootstrapTour) {
   'use strict';
 
